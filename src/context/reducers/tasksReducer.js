@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from 'nanoid'
-import { priorities, status } from "../../constants/enums";
+
+// Constants
+import { status } from "../../constants/enums";
+
 
 const initialState = {
     // Storing a Data in a Local Storage
@@ -14,6 +16,14 @@ const initialState = {
     recoverTasks: [],
     isFilterApplied: false,
 }
+
+// Initialize a Tasks
+
+const initialTasksFn = (state, action) => {
+    if (action.payload)
+        state.tasks = action.payload;
+}
+
 
 // To Add A Task To the Function
 const addTaskFn = (state, action) => {
@@ -35,11 +45,11 @@ const addTaskFn = (state, action) => {
         team: action.payload.team,
     };
     state.tasks = [...state.tasks, newTask];
-
 }
 
 // To Edit the Task only priority and Status allowed
 const editTaskFn = (state, action) => {
+    const date = new Date();
     state.tasks = state.tasks.map(
         task => {
             // ------ 
@@ -64,7 +74,7 @@ const editTaskFn = (state, action) => {
             // ------
             return task;
         }
-    )
+    );
 }
 
 // To Edit the Task Using Id
@@ -74,14 +84,14 @@ const deleteTaskFn = (state, action) => {
 
 // To Filter the Tasks
 const getAllFilterTasksFn = (state, action) => {
-
     state.recoverTasks = state.tasks;
     state.tasks = state.tasks.filter(
         task =>
             // To Filter the Assignee with name
             (
                 action.payload.assigneeName ?
-                    task.assignee.toLowerCase().includes(action.payload.assigneeName.toLowerCase())
+                    task.assignee.toLowerCase()
+                        .includes(action.payload.assigneeName.toLowerCase())
                     : true
             )
             // To Filter the task priority
@@ -120,6 +130,7 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState: initialState,
     reducers: {
+        initialTasks: initialTasksFn,
         addTask: addTaskFn,
         editTask: editTaskFn,
         deleteTask: deleteTaskFn,
@@ -137,6 +148,7 @@ export const {
     categoriesTasks,
     getAllFilterTasks,
     resetTasks,
+    initialTasks,
 } = tasksSlice.actions;
 
 

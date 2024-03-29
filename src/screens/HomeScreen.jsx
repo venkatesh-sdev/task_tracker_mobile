@@ -1,6 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
+
+// Third Party Styling Libs
 import { LinearGradient } from 'expo-linear-gradient'
+
+// Components
 import Tasks from '../components/home/Tasks'
 
 

@@ -1,21 +1,27 @@
 /* esViewnt-disable react/prop-types */
-import { useState } from "react";
-
-import { useDispatch } from "react-redux";
-import { categoriesTasks, deleteTask } from "../../context/reducers/tasksReducer";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
+
+
+import { useDispatch, useSelector } from "react-redux";
+import { categoriesTasks, deleteTask, getAllTasks } from "../../context/reducers/tasksReducer";
 
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
-const TaskCard = ({ task }) => {
+// Storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const TaskCard = ({ task }) => {
 
     const { title, description, priority, assignee, status, id } = task;
 
+    const tasks = useSelector(getAllTasks);
+
+    // TH-Hooks
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
+    // Action Modal Handler
     const actionHandler = () =>
         Alert.alert('Perform Actions', 'Edit/Delete', [
             {
@@ -30,12 +36,22 @@ const TaskCard = ({ task }) => {
             { text: 'Delete', onPress: deleteActionHandler },
         ]);
 
+    // Task Edit Handlder
     const editActionHandler = () => {
         navigation.navigate('Editor', { isEditable: true, editableContent: task })
     }
 
+
+    const reassignTasks = async () => {
+        await AsyncStorage.removeItem('tasks');
+        await AsyncStorage.setItem('tasks', JSON.stringify(tasks))
+    }
+
+
+    // Delete Tasks Handler
     const deleteActionHandler = () => {
         dispatch(deleteTask(id));
+        reassignTasks();
         dispatch(categoriesTasks());
     }
 

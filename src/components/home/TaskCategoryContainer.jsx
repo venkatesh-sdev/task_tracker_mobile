@@ -1,8 +1,6 @@
-/* eslint-disable react/prop-types */
+
 import { Dimensions, FlatList, Text, View } from "react-native"
 import TaskCard from "./TaskCard"
-
-
 
 const TaskCategoryContainer = ({ title, color, tasks }) => {
 
@@ -25,9 +23,9 @@ const TaskCategoryContainer = ({ title, color, tasks }) => {
                         keyExtractor={(_, index) => index.toString()}
                         renderItem={({ item }) => <TaskCard task={item} />}
                         contentContainerStyle={{
-                            paddingBottom: tasks.length * 10,
-                            rowGap: 10,
-                            paddingTop: 10,
+                            paddingBottom: tasks.length * 20,
+                            gap: 20,
+                            paddingTop: 20,
                         }}
                     />
             }

@@ -18,7 +18,10 @@ const EditorTextInput = ({
             placeholder={placeholder}
             editable={!isEditable}
             selectTextOnFocus={!isEditable}
-            style={{ height: isMultiline ? 120 : null, maxHeight: isMultiline ? 120 : null }}
+            style={{
+                height: isMultiline ? 120 : null,
+                maxHeight: isMultiline ? 120 : null
+            }}
             numberOfLines={isMultiline ? 4 : null}
             multiline={isMultiline} onChangeText={(value) => setData(value)}
             className="bg-white p-2 text-lg rounded-lg justify-start items-start"

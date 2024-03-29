@@ -1,16 +1,25 @@
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
+// Navigation
 import { useNavigation } from '@react-navigation/native';
+
+// Third Party Styling Lib
 import { LinearGradient } from 'expo-linear-gradient';
 
+// Constants
 import { priorities } from '../constants/enums';
 import { priorityList, statusList } from '../constants/data';
 
-import { addTask, editTask } from '../context/reducers/tasksReducer';
+// StateManagement
+import { addTask, editTask, getAllTasks } from '../context/reducers/tasksReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
+// Components
 import { CustomDropDown, CustomButton, EditorAppBar, EditorTextInput } from '../components';
+
+//Storage 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const EditorScreen = ({ route }) => {
@@ -28,6 +37,12 @@ const EditorScreen = ({ route }) => {
     const [priorityContent, setPriorityContent] = useState(editableContent?.priority || priorities.p0);
     const [statusContent, setStatusContent] = useState(editableContent?.status || null);
 
+    const tasks = useSelector(getAllTasks);
+
+    const reassignTasks = async () => {
+        await AsyncStorage.removeItem('tasks');
+        await AsyncStorage.setItem('tasks', JSON.stringify(tasks))
+    }
 
     const EditTask = () => {
         const actions = {
@@ -37,8 +52,9 @@ const EditorScreen = ({ route }) => {
         }
         dispatch(editTask(actions))
         navigation.goBack();
+        reassignTasks();
     }
-    const AddTask = () => {
+    const AddTask = async () => {
         const newTask = {
             title: titleContent,
             description: descriptionContent,
@@ -48,6 +64,7 @@ const EditorScreen = ({ route }) => {
         }
         dispatch(addTask(newTask));
         navigation.goBack();
+        reassignTasks();
     }
 
     useEffect(() => {

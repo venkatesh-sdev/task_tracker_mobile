@@ -1,9 +1,15 @@
-import { AntDesign } from "@expo/vector-icons"
 import { Text, TextInput, TouchableOpacity, View } from "react-native"
-import CustomDropDown from "../global/CustomDropDown";
-import { priorityList } from "../../constants/data";
 import { useState } from "react";
+
+// Icons and Third Party Components
+import { AntDesign } from "@expo/vector-icons"
 import DateTimePicker from "@react-native-community/datetimepicker";
+
+// Components
+import CustomDropDown from "../global/CustomDropDown";
+
+// Constants
+import { priorityList } from "../../constants/data";
 
 const FilterBar = ({
     isFilterApplied,
@@ -17,7 +23,7 @@ const FilterBar = ({
     const [date, setDate] = useState(new Date());
     const [showDateModal, setShowDateModal] = useState(false);
 
-    const dateChange = (event, date) => {
+    const dateChange = (_, date) => {
         const newDate = parseInt(
             date.getFullYear() + "" +
             (date.getMonth() + 1) + "" +
@@ -33,7 +39,7 @@ const FilterBar = ({
             <Text className="font-medium text-lg text-black">
                 Filter By:
             </Text>
-            <TouchableOpacity onPress={addFilter}>
+            <TouchableOpacity onPress={addFilter} className="bg-white  rounded-md py-2 w-[100px] items-center justify-center">
                 <Text className="font-medium text-sm text-blue-600">
                     {isFilterApplied ? "Remove" : "Apply"}
                 </Text>
