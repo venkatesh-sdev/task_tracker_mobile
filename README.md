@@ -2,7 +2,9 @@
 
 
 <div align="center">
-    <img src="https://github.com/venkatesh-sdev/task_tracker_mobile/assets/118906759/d4d28f7f-f7a2-43f3-8aec-4ebca097ee86" width="400px"</img> 
+    <img src="https://github.com/venkatesh-sdev/task_tracker_mobile/assets/118906759/d4d28f7f-f7a2-43f3-8aec-4ebca097ee86" width="200px"</img> 
+     <img src="https://github.com/venkatesh-sdev/task_tracker_mobile/assets/118906759/d4d28f7f-f7a2-43f3-8aec-4ebca097ee86" width="200px"</img> 
+     <img src="https://github.com/venkatesh-sdev/task_tracker_mobile/assets/118906759/d4d28f7f-f7a2-43f3-8aec-4ebca097ee86" width="200px"</img> 
 </div>
 <!-- ![WhatsApp Image 2024-03-29 at 6 26 38 AM (2)](https://github.com/venkatesh-sdev/task_tracker_mobile/assets/118906759/7e269a2f-87fa-4214-9995-fb921076ac23)
 ![WhatsApp Image 2024-03-29 at 6 26 38 AM (1)](https://github.com/venkatesh-sdev/task_tracker_mobile/assets/118906759/89e457ee-801a-4130-91d0-80b54af724a7)
